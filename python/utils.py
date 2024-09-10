@@ -60,17 +60,17 @@ def drawPath(path, color, start, goal, screen, MARGIN, GRID_SIZE):
             pygame.display.update()
 
 
-def drawGrid(GRID_X, GRID_Y, grid, screen, MARGIN, GRID_SIZE, BLACK, GRAY, GREEN, RED):
+def drawGrid(GRID_X, GRID_Y, grid, screen, MARGIN, GRID_SIZE, COLORS):
     for y in range(GRID_X):
         for x in range(GRID_Y):
             if grid[x][y].isObstacle:
-                drawRect(BLACK, x, y, screen, MARGIN, GRID_SIZE)
+                drawRect(COLORS.get('BLACK'), x, y, screen, MARGIN, GRID_SIZE)
             else:
-                drawRect(GRAY, x, y, screen, MARGIN, GRID_SIZE)
+                drawRect(COLORS.get('GRAY'), x, y, screen, MARGIN, GRID_SIZE)
             if x == 0 and y == GRID_Y - 1:
-                drawRect(GREEN, x, y, screen, MARGIN, GRID_SIZE)
+                drawRect(COLORS.get('GREEN'), x, y, screen, MARGIN, GRID_SIZE)
             if x == GRID_X - 1 and y == 0:
-                drawRect(RED, x, y, screen, MARGIN, GRID_SIZE)
+                drawRect(COLORS.get('RED'), x, y, screen, MARGIN, GRID_SIZE)
 
 
 def randomColor():
