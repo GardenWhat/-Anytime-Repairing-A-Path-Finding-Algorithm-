@@ -9,9 +9,9 @@ class Node:
         self.H = 0
         self.G = 10000000000
         self.children = []
-        self.isObstacle = False
-        self.start = False
-        self.goal = False
+        self.is_obstacle = False
+        self.is_start = False
+        self.is_goal = False
 
     def cost(self):
         if self.parent:
@@ -20,19 +20,19 @@ class Node:
             return 0
 
     def isObstacle(self):
-        return self.isObstacle
+        return self.is_obstacle
 
     def setObstacle(self):
-        self.isObstacle = True
+        self.is_obstacle = True
 
     def isStart(self):
-        return self.start
+        return self.is_start
 
     def setStart(self):
-        self.start = True
+        self.is_start = True
 
     def isGoal(self):
-        return self.goal
+        return self.is_goal
 
     def setGoal(self):
-        self.goal = True
+        self.is_goal = True

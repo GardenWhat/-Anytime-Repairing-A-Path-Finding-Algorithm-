@@ -14,48 +14,48 @@ def drawRect(color, x, y, screen, MARGIN, GRID_SIZE):
 
 
 def north(grid, x, y, GRID_Y):
-    if y > 0 and not grid[x][y - 1].isObstacle:
+    if y > 0 and not grid[x][y - 1].is_obstacle:
         return grid[x][y - 1]
 
 
 def south(grid, x, y, GRID_Y):
-    if y < GRID_Y - 1 and not grid[x][y + 1].isObstacle:
+    if y < GRID_Y - 1 and not grid[x][y + 1].is_obstacle:
         return grid[x][y + 1]
 
 
 def west(grid, x, y, GRID_X):
-    if x > 0 and not grid[x - 1][y].isObstacle:
+    if x > 0 and not grid[x - 1][y].is_obstacle:
         return grid[x - 1][y]
 
 
 def east(grid, x, y, GRID_X):
-    if x < GRID_X - 1 and not grid[x + 1][y].isObstacle:
+    if x < GRID_X - 1 and not grid[x + 1][y].is_obstacle:
         return grid[x + 1][y]
 
 
 def northEast(grid, x, y, GRID_X, GRID_Y):
-    if x < GRID_X - 1 and y > 0 and not grid[x + 1][y - 1].isObstacle:
+    if x < GRID_X - 1 and y > 0 and not grid[x + 1][y - 1].is_obstacle:
         return grid[x + 1][y - 1]
 
 
 def southEast(grid, x, y, GRID_X, GRID_Y):
-    if x < GRID_X - 1 and y < GRID_Y - 1 and not grid[x + 1][y + 1].isObstacle:
+    if x < GRID_X - 1 and y < GRID_Y - 1 and not grid[x + 1][y + 1].is_obstacle:
         return grid[x + 1][y + 1]
 
 
 def northWest(grid, x, y, GRID_X, GRID_Y):
-    if x > 0 and y > 0 and not grid[x - 1][y - 1].isObstacle:
+    if x > 0 and y > 0 and not grid[x - 1][y - 1].is_obstacle:
         return grid[x - 1][y - 1]
 
 
 def southWest(grid, x, y, GRID_X, GRID_Y):
-    if x > 0 and y < GRID_Y - 1 and not grid[x - 1][y + 1].isObstacle:
+    if x > 0 and y < GRID_Y - 1 and not grid[x - 1][y + 1].is_obstacle:
         return grid[x - 1][y + 1]
 
 
-def drawPath(path, color, start, goal, screen, MARGIN, GRID_SIZE):
+def drawPath(path, color, screen, MARGIN, GRID_SIZE):
     for p in path:
-        if not p == start and not p == goal:
+        if not p.is_start and not p.is_goal:
             drawRect(color, p.x, p.y, screen, MARGIN, GRID_SIZE)
             pygame.display.update()
 
@@ -63,7 +63,7 @@ def drawPath(path, color, start, goal, screen, MARGIN, GRID_SIZE):
 def drawGrid(GRID_X, GRID_Y, grid, screen, MARGIN, GRID_SIZE, COLORS):
     for y in range(GRID_X):
         for x in range(GRID_Y):
-            if grid[x][y].isObstacle:
+            if grid[x][y].is_obstacle:
                 drawRect(COLORS.get('BLACK'), x, y, screen, MARGIN, GRID_SIZE)
             else:
                 drawRect(COLORS.get('GRAY'), x, y, screen, MARGIN, GRID_SIZE)
@@ -87,10 +87,10 @@ def ED(current, goal):
 def setChildren(GRID_X, GRID_Y, grid, percentChanceForWall, actualPercentOfWalls, start, goal):
     for y in range(GRID_X):
         for x in range(GRID_Y):
+            grid[x][y].H = ED(grid[x][y], goal)
             if grid[x][y] != start and grid[x][y] != goal:
                 if randint(1, 100) <= percentChanceForWall:
                     grid[x][y].setObstacle()
-                    actualPercentOfWalls += 1
             if north(grid, x, y, GRID_Y):
                 grid[x][y].children.append(north(grid, x, y, GRID_Y))
             if south(grid, x, y, GRID_Y):

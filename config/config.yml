@@ -1,6 +1,6 @@
-GRID_SIZE: 30
-GRID_X: 20
-GRID_Y: 20
+GRID_SIZE: 10
+GRID_X: 100
+GRID_Y: 100
 MARGIN: 2
 COLORS:
   - GRAY:
@@ -31,6 +31,7 @@ COLORS:
       - 255
       - 105
       - 180
-percentChanceForWall: 10
+percentChanceForWall: 40
 actualPercentOfWalls: 0
-weight: 20
+weight: 100
+weightDelta: 10
